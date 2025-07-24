@@ -1,0 +1,990 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}			    % Use this package to include images %Path relative to the main .tex file 
+\graphicspath{ {./Images/} }
+\usepackage{amsmath}			    % A library of many standard math expressions
+\usepackage{mathtools}              % For Aboxed{} (https://tex.stackexchange.com/questions/346577/boxed-and-align)
+% \usepackage[margin=1in]{geometry} % Sets 1in margins. 
+\usepackage{fancyhdr}			    % Creates headers and footers
+\usepackage{enumerate}              % These two packages give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}               % https://www.overleaf.com/learn/latex/Hyperlinks
+\usepackage{xcolor}
+\usepackage[svgnames]{xcolor}
+\usepackage{float}
+\usepackage{cmupint}                % For upright integrals. https://tex.stackexchange.com/questions/503527/how-to-write-upright-integrals-with-automatic-sizing
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usepackage{titling}
+\usepackage{minted}                 % For code blocks
+\usemintedstyle{monokai}            % For code blocks
+\definecolor{bg}{HTML}{282828}      % For code blocks, from https://github.com/kevinsawicki/monokai
+\usepackage{nameref}
+\usepackage{caption}                % To use \caption*{} to show only the caption text without "Table 1: <text>"
+% \usepackage{mathtools, tccomicsans}
+% \usepackage{comicsans}
+% \usepackage[main,largesymbols]{tccomicsans} % https://www.reddit.com/r/LaTeX/comments/1l5no5d/comment/mwm64ze/
+\renewcommand*\contentsname{Summary}
+% \renewcommand{\contentsname}{\centering \normalfont\normalsize Contents}
+\renewcommand{\contentsname}{\centering \bfseries\Large Contents}
+% \renewcommand{\cftaftertoctitle}{\hfill}
+
+\hypersetup
+{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    %pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+}
+
+% \title{OOP Lab Manual 05}
+% \author{STM}
+% \date{December 2024}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+
+    \vspace*{-8em}
+    \includegraphics[width=0.5\textwidth]{Bismillah.png}%\\[2cm]
+    \vspace*{5em}
+
+    
+    \vspace*{1cm}
+
+     \includegraphics[width=0.5\textwidth]{GU Tech 1685x1330.png}\\[2cm]
+
+    \MakeUppercase{\Huge \textbf{GU TECH}}\\[1.5ex]
+    
+    \vspace*{1cm}
+    
+    \Huge Problem Solving \& Programming Fundamentals \\[1.5ex]
+    \LARGE Lab 09 + 10 \\[2cm]
+
+    % {\Large STM} \\ [2cm]
+
+    {\Large \today}\\[1cm]
+    
+\end{titlepage}
+
+\newpage
+
+% \vspace*{4cm}
+% \begin{center}
+%     \Huge \textbf{Outline}
+% \end{center}
+
+% \begin{itemize}
+%    \item \nameref{Functions}
+% \end{itemize}
+
+\tableofcontents
+
+\newpage
+\addcontentsline{toc}{part}{Arrays}
+\part*{\centering Arrays}
+
+\noindent An array is a data structure consisting of a collection of values (integers, doubles, chars), of same memory size, each identified by an array index. \\ 
+
+
+
+\begin{table}[H]
+\makebox[\linewidth][c]
+{
+    \begin{tabular}{| c | c | c | c | c | c | c | c | c |} 
+    \hline
+    \textbf{Indexes} & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+    \hline
+    \textbf{Values} & 70 & 84 & 65 & 90 & 60 & 82 & 76 & 91 \\
+    \hline
+    \end{tabular}
+}
+\caption*{This array holds marks of 8 students.}
+\end{table}
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+	
+int marks[8] = {70, 84, 65, 90, 60, 82, 76, 91};
+
+for (int i = 0; i < 8; i++)
+{
+    printf("%d\t", marks[i]);
+}
+printf("\n");
+
+\end{minted}
+
+\vspace{1cm}
+
+\begin{itemize}
+    \item In C and C++, arrays store data in \textbf{contiguous} memory.
+    \item In C and C++, array indexes start from 0 instead of 1. This is called 0-based indexing.
+    
+    \begin{itemize}
+        \item This means that for an array that hold 10 values, the valid indices range from 0 to 9, and \textbf{not} 1 to 10, or 0 to 10.
+        
+        \begin{itemize}
+            \item In other words, for an array of size $n$, the last valid index is $n - 1$.
+        \end{itemize}
+
+        \item Some programming languages, like Python, have 1-based indexing.
+    \end{itemize}
+
+    \item The plural of ``index'' can be either indexes or indices.
+
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\addcontentsline{toc}{section}{Array Declaration \& Access}
+\section*{Array Declaration \& Access}
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+	
+dataType arrayName[arraySize];
+
+\end{minted}
+
+% \vspace{1cm}
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+	
+int marks[8] = {70, 84, 65, 90, 60, 82, 76, 91};
+
+double prices[4] = {9.99, 14.99, 49.99, 99.99};
+
+\end{minted}
+
+\vspace{1cm}
+
+\noindent Once declared, the size and type of an array cannot be changed. \\
+
+\noindent We can access individual elements of an array by specifying their index. \\
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+
+#include <stdio.h>
+
+int main()
+{
+    double prices[4] = {9.99, 14.9, 49.9, 99.9};
+
+    printf("%lf\n", prices[0]);
+    printf("%lf\n", prices[1]);
+    printf("%lf\n", prices[2]);
+    printf("%lf\n", prices[3]);
+
+    scanf("%lf", &prices[2]);
+    printf("%lf\n", prices[2]);
+
+    return 0;
+}
+
+\end{minted}
+
+\vspace{1cm}
+
+\noindent As with any other variable, we need \textcolor{red}{\texttt{\&}} in \textcolor{red}{\texttt{scanf}} for array elements as well: 
+
+\begin{center}
+    \textcolor{red}{\texttt{scanf("\%lf", \&prices[2]);}}
+\end{center}
+
+\noindent \textbf{Reminder:} We need to use \textcolor{red}{\texttt{\%lf}} instead of \textcolor{red}{\texttt{\%f}} when dealing with \textcolor{red}{\texttt{double}} type. \\
+
+% \newpage
+\noindent We can also iterate through an array in a loop.
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+
+int main()
+{
+    int marks[8] = {70, 84, 65, 90, 60, 82,
+                    76, 91};
+
+    for (int i = 0; i < 8; i++)
+    {
+        printf("%d\t", marks[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+\end{minted}
+
+
+
+
+
+
+
+
+
+\newpage
+\addcontentsline{toc}{section}{Passing Arrays to Functions}
+\section*{Passing Arrays to Functions}
+
+\noindent There are two ways to pass arrays to functions:
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+
+double calculateAverage(int* arr, int length)
+
+\end{minted}
+
+\begin{center}
+    Or
+\end{center}
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+
+double calculateAverage(int arr[], int length)
+
+\end{minted}
+
+\vspace{1cm}
+
+\noindent They both mean \href{https://stackoverflow.com/questions/6567742/passing-an-array-as-an-argument-to-a-function-in-c}{exactly the same thing}. You can use either. I personally prefer the former, that is, \textcolor{red}{\texttt{(int* arr, int length)}}. \\
+
+\noindent When passing arrays to functions, generally, we should always pass the length of the array as well.
+
+\begin{itemize}
+    \item An array itself does not hold any information about its length. 
+    \item Functions that operate on arrays need to know array length to determine how many times to iterate over (run loops for).
+    \item For reasons we will see later, \textcolor{red}{\texttt{char}} arrays are exempted from this.
+\end{itemize}
+
+\newpage
+\noindent Let us see a function that calculates the average from an array.  
+
+\begin{align*}
+    \text{Average} &= \frac{\sum x_i}{n} \\
+\end{align*}
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+
+#include <stdio.h>
+
+double calculateAverage(int* arr, int length)
+{
+    int sum = 0;
+    for (int i = 0; i < length; i++)
+    {
+        sum = sum + arr[i];
+    }
+
+    double average = sum / length;
+
+    return average;
+}
+
+int main()
+{
+    int marks[8] = {70, 84, 65, 90, 60, 82, 
+                    76, 91};
+
+    double average = calculateAverage(marks, 8);
+    printf("%lf\n", average);
+
+    return 0;
+}
+
+\end{minted}
+
+% \vspace{1cm}
+\newpage
+\noindent Can you write a function that calculates variance or standard deviation?
+
+\begin{align*}
+    \sigma^2 &= \frac{\sum x_i ^2}{n} - \left(\frac{\sum x_i}{n} \right)^2 & \sigma &= \sqrt{\frac{\sum x_i ^2}{n} - \left(\frac{\sum x_i}{n} \right)^2}\\
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\addcontentsline{toc}{section}{Memory Stomping}
+\section*{Memory Stomping}
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+#include <stdio.h>
+
+int main()
+{
+	int arr[2] = {0, 1};
+	int b = 2;
+	
+	printf("arr[2] = %d\n", arr[2]);
+	
+	arr[2] = 10;    //Memory stomping!
+	printf("\narr[2] = %d\n", arr[2]);
+	
+	printf("\nb = %d\n", b);
+	
+	return 0;
+}
+\end{minted}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\addcontentsline{toc}{section}{Two Dimensional Arrays}
+\section*{Two Dimensional Arrays}
+
+A two dimesional array is an array of arrays. Let us try to visualize an example:
+
+\begin{table}[H]
+\makebox[\linewidth][c]
+{
+    \begin{tabular}{| c | c | c | c |} 
+    \hline
+    &  &  &  \\
+    & Column 0 & Column 1 & Column 2 \\
+    &  &  &  \\
+    \hline
+    &  &  &  \\
+    Row 0 & array[0, 0] = 1 & array[0, 1] = 5 & array[0, 2] = 9 \\
+    &  &  &  \\
+    \hline
+    &  &  &  \\
+    Row 1 & array[1, 0] = 5 & array[1, 1] = 3 & array[1, 2] = 5 \\
+    &  &  &  \\
+    \hline
+    &  &  &  \\
+    Row 2 & array[2, 0] = 7 & array[2, 1] = 2 & array[2, 2] = 3 \\
+    &  &  &  \\
+    \hline
+    \end{tabular}
+}
+\end{table}
+
+\noindent This 2d array or `array of arrays', represents a 3x3 matrix: 
+
+\begin{align*}
+    \begin{bmatrix}
+        1 & 5 & 9 \\
+        5 & 3 & 5 \\
+        7 & 2 & 3 \\
+    \end{bmatrix}
+\end{align*}
+
+\noindent Let us see how we can represent this in code (on next page):
+
+\newpage
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+
+#include <stdio.h>
+
+int main()
+{
+    int array[3][3] = {{1, 5, 9}, 
+                       {5, 3, 5}, 
+                       {7, 2, 3}};
+
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            printf("%d\t", array[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+\end{minted}
+
+\vspace{1cm}
+
+\noindent Here, \textcolor{red}{\texttt{\{1, 5, 9\}}}, \textcolor{red}{\texttt{\{5, 3, 5\}}} and \textcolor{red}{\texttt{\{7, 2, 3\}}} are three individual arrays within an array. \\
+
+\noindent Generally, we need to use nested loops to iterate over two dimensional arrays. \\
+
+\noindent \textbf{Note:} It is important to understand that real memory is linear, and a multidimensioanl array is actually always stored like a one dimensional array. \\
+
+
+
+\newpage
+\addcontentsline{toc}{section}{Passing Two Dimensional Arrays To Functions}
+\section*{Passing Two Dimensional Arrays To Functions}
+
+\noindent Further reading: \href{https://www.reddit.com/r/C_Programming/comments/t61f7o/question_passing_multidimensional_arrays_to/}{Question: Passing multidimensional arrays to functions.} \\
+
+\noindent We have not yet covered memory allocation, and it is important to understand that unless a two dimensional array or a multidimensional array is allocated on heap memory, we cannot 
+use the following syntax for passing such an array to a function: \\
+
+\noindent \textcolor{red}{\texttt{printArray(int** array, int rows, int cols)}} \\
+
+\noindent In other words, if we declared our array on stack (the way we have been doing until now), that is, \textcolor{red}{\texttt{int array[3][3]}}, we cannot use the above syntax to pass it to a function. \\
+
+\noindent For the sake of completeness, the follwoing code demonstrates allocating a two dimensional array on heap and passing it to a function (next page).\\  
+
+\newpage
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+#include <stdio.h>
+
+void printArray(int** arr, int rows, int cols)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main()
+{
+    int rows = 5, cols = 5;
+    int **array;
+    // Allocate rows
+    array = (int **) malloc(rows * sizeof(int *));
+    for (int i = 0; i < rows; i++)
+    {
+        // Allocate columns for each row
+        array[i] = (int *) malloc(cols * sizeof(int));
+    }
+
+    printArray(rows, cols, array);
+
+    // Free allocated memory
+    for (int i = 0; i < rows; i++)
+    {
+        free(array[i]);
+    }
+    free(array);
+    
+    return 0;
+}
+\end{minted}
+
+\newpage
+
+\noindent For a two dimensional array declared on stack, this is how we can pass it to a function: \textcolor{red}{\texttt{void printArray(int array[9][9])}}. \\
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+#include <stdio.h>
+
+void printArray(int array[3][3])
+{
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            printf("%d ", array[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main()
+{
+    int array[3][3] = {{1, 5, 9}, 
+                       {5, 3, 5}, 
+                       {7, 2, 3}};
+
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            printf("%d\t", array[i][j]);
+        }
+        printf("\n");
+    }
+
+	printf("\n");
+	printArray(array);
+
+    return 0;
+}
+\end{minted}
+
+\newpage
+
+\newpage
+\addcontentsline{toc}{section}{Sudoku}
+\section*{Sudoku}
+
+
+
+\newpage
+\noindent Given the following code, can you write a program to check if a Sudoku configuration is valid or invalid?
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+#include <stdio.h>
+#include <stdbool.h>
+
+bool isSudokuRowValid(int matrix[9][9], int rowNo);
+bool isSudokuColValid(int matrix[9][9], int colNo);
+bool isSudokuSubMatrixValid(int matrix[9][9], int matrixNo);
+bool isSudokuValid(int matrix[9][9]);
+void printSudoku(int matrix[9][9]);
+
+int main()
+{
+    int matrix[9][9] = { {9, 3, 0, 0, 7, 0, 0, 0, 0},
+                         {6, 0, 0, 1, 9, 5, 0, 0, 0},
+                         {0, 5, 8, 0, 0, 0, 0, 6, 0},
+                         {8, 0, 0, 0, 6, 0, 0, 0, 3},
+                         {4, 0, 0, 8, 0, 3, 0, 0, 1},
+                         {7, 0, 0, 0, 2, 0, 0, 0, 6},
+                         {0, 6, 0, 0, 0, 0, 2, 8, 0},
+                         {0, 0, 0, 4, 1, 9, 0, 0, 5},
+                         {0, 0, 0, 0, 8, 0, 0, 7, 9} };
+
+    //int matrix[9][9] = { {9, 3, 0, 0, 7, 0, 0, 0, 0},
+    //                        {6, 0, 0, 1, 9, 5, 0, 0, 0},
+    //                        {0, 5, 8, 0, 0, 0, 0, 6, 0},
+    //                        {8, 0, 0, 0, 6, 0, 0, 0, 3},
+    //                        {4, 0, 0, 8, 0, 3, 0, 0, 1},
+    //                        {7, 0, 0, 0, 2, 0, 0, 0, 6},
+    //                        {0, 6, 0, 0, 0, 0, 2, 8, 0},
+    //                        {0, 0, 0, 4, 1, 9, 7, 0, 5},
+    //                        {0, 0, 0, 0, 8, 0, 0, 7, 9} };
+
+    printSudoku(matrix);
+    isSudokuValid(matrix);
+
+    return 0;
+}
+\end{minted}
+
+
+
+
+
+
+
+
+
+
+\newpage
+\addcontentsline{toc}{part}{Strings}
+\part*{\centering Strings}
+
+\noindent A string is a \textcolor{red}{\texttt{char}} array of fixed size that is always null terminated. \\  
+
+\noindent Consider the following string: 
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+
+    char name[] = "Asif";
+
+\end{minted}
+
+\noindent This \textcolor{red}{\texttt{char}} array has \textbf{5} (not 4) characters: `A', `s', `i', `f' and `\textbackslash 0'.  \\
+
+\noindent This string can contain 5 \textcolor{red}{\texttt{chars}}, has a length of 4, and contains 5 \textcolor{red}{\texttt{chars}}; the last \textcolor{red}{\texttt{char}}, \textcolor{red}{\texttt{`\textbackslash 0'}}, 
+the null character, is used to determine the end of the string. \\
+
+\noindent Before talking about what is null character, let us consider another similar string:
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+    
+    char name[50] = "Asif";
+
+\end{minted}
+
+\noindent This string can contain \textbf{50} \textcolor{red}{\texttt{chars}}, has a length of 4, and again contains 5 \textcolor{red}{\texttt{chars}}; as before, the last \textcolor{red}{\texttt{char}}, 
+\textcolor{red}{\texttt{`\textbackslash 0'}}, the null character, is used to determine the end of the string. \\
+
+\addcontentsline{toc}{section}{Null Character}
+\section*{Null Character}
+
+\noindent The null character is a control character with the value zero and is represented as a \textcolor{red}{\texttt{char}} by \textcolor{red}{\texttt{`\textbackslash 0'}}. \\
+
+\noindent Recall that in C and C++, an array itself does not contain information about its size. That is why when we pass, say, integer or double array to a function, we also have to pass the 
+length of the array as well. \\ 
+
+\noindent For our convenience, however, we use the null character at the end of \textcolor{red}{\texttt{char}} strings. This lets us pass strings to functions like 
+\textcolor{red}{\texttt{printf()}} without specifying their length. When such a function operates on a string, it keeps iterating until it encounters the null character.   
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+
+    char name[50] = "Asif";
+    printf("%s\n", name);
+
+\end{minted}
+
+\addcontentsline{toc}{section}{Initializing Strings}
+\section*{Initializing Strings}
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+
+    char c[] = "Asif";
+
+    char c[50] = "Asif";
+
+    char c[] = {'A', 's', 'i', 'f', '\0'};
+
+    char c[5] = {'A', 's', 'i', 'f', '\0'};
+
+\end{minted}
+
+\vspace{1cm}
+\noindent When using double quotes to initialize a string, we do not have to explicitly append the null character; the compiler does the job for us. \\
+
+
+
+\newpage
+\addcontentsline{toc}{section}{Scanning \& Printing Strings}
+\section*{Scanning \& Printing Strings}
+
+When scanning and printing strings, we use the \textcolor{red}{\texttt{\%s}} format specifier.
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+
+#include <stdio.h>
+
+int main()
+{
+    char str[100];
+
+    printf("Enter string: ");
+    scanf(" %s", str);
+    printf("%s\n", str);
+
+    return 0;
+}
+
+\end{minted}
+
+% \newpage
+\addcontentsline{toc}{section}{Accessing Individual Characters of Strings}
+\section*{Accessing Individual Characters of Strings}
+
+We access individual characters of strings or \textcolor{red}{\texttt{char}} arrays just like other arrays; by using square brackets \textcolor{red}{\texttt{[]}}.   
+
+% newpage
+\addcontentsline{toc}{section}{String Manipulation}
+\section*{String Manipulation}
+
+\noindent String manipulation refers to various operations on null-terminated strings, like finding the length of a string, copying one string into another string, string concatenation, etc. \\
+
+\noindent The \textcolor{red}{\texttt{<string.h>}} header provides us with built in functions for string manipulation but we will write and use our own functions for now for the sake of practice. \\ 
+
+\addcontentsline{toc}{subsection}{Finding Length of a String}
+\subsection*{Finding Length of a String}
+
+\begin{minted}[bgcolor=bg, framesep=2mm]{cpp}
+#include <stdio.h>
+
+int getStringLength(char* str)
+{
+	int length = 0;
+	int index = 0;
+	
+	//while (str[index++] != '\0')
+	while (str[index] != '\0')
+	{
+		index++;
+		length++;
+	}
+	
+	return length;
+}
+
+int main()
+{
+	char name[50] = "Asif";
+	
+	printf("%s\n", name);
+	
+	char str[100];
+	
+	printf("Enter string: ");
+	scanf(" %s", str);
+	printf("%s\n", str);
+
+	printf("Length = %d\n", getStringLength(str));
+
+	return 0;
+}
+
+\end{minted}
+
+\newpage
+\addcontentsline{toc}{section}{ASCII Table}
+\section*{ASCII Table}
+
+\begin{table}[H]
+\makebox[\linewidth][c]
+{
+    \begin{tabular}{| c | c | c | c | c | c | c | c | c |} 
+    \hline
+    \textbf{Dec} & \textbf{Hex} & \textbf{Char} & \textbf{Dec} & \textbf{Hex} & \textbf{Char} & \textbf{Dec} & \textbf{Hex} & \textbf{Char} \\
+    \hline
+    0 & 00 & [NULL] & 32 & 20 & [SPACE] & 64 & 40 & @ \\
+    1 & 01 & [SOH] & 33 & 21 & ! & 65 & 41 & A \\
+    2 & 02 & [STX] & 34 & 22 & " & 66 & 42 & B \\
+    3 & 03 & [ETX] & 35 & 23 & \# & 67 & 43 & C \\
+    4 & 04 & [EOT] & 36 & 24 & \$ & 68 & 44 & D \\
+    5 & 05 & [ENQ] & 37 & 25 & \% & 69 & 45 & E \\
+    6 & 06 & [ACK] & 38 & 26 & \& & 70 & 46 & F \\
+    7 & 07 & [BEL] & 39 & 27 & ' & 71 & 47 & G \\
+    8 & 08 & [BS] & 40 & 28 & ( & 72 & 48 & H \\
+    9 & 09 & [TAB] & 41 & 29 & ) & 73 & 49 & I \\
+    10 & 0A & [LF] & 42 & 2A & * & 74 & 4A & J \\
+    11 & 0B & [VT] & 43 & 2B & + & 75 & 4B & K \\
+    12 & 0C & [FF] & 44 & 2C & , & 76 & 4C & L \\
+    13 & 0D & [CR] & 45 & 2D & - & 77 & 4D & M \\
+    14 & 0E & [SO] & 46 & 2E & . & 78 & 4E & N \\
+    15 & 0F & [SI] & 47 & 2F & / & 79 & 4F & O \\
+    16 & 10 & [DLE] & 48 & 30 & 0 & 80 & 50 & P \\
+    17 & 11 & [DC1] & 49 & 31 & 1 & 81 & 51 & Q \\
+    18 & 12 & [DC2] & 50 & 32 & 2 & 82 & 52 & R \\
+    19 & 13 & [DC3] & 51 & 33 & 3 & 83 & 53 & S \\
+    20 & 14 & [DC4] & 52 & 34 & 4 & 84 & 54 & T \\
+    21 & 15 & [NAK] & 53 & 35 & 5 & 85 & 55 & U \\
+    22 & 16 & [SYN] & 54 & 36 & 6 & 86 & 56 & V \\
+    23 & 17 & [ETB] & 55 & 37 & 7 & 87 & 57 & W \\
+    24 & 18 & [CAN] & 56 & 38 & 8 & 88 & 58 & X \\
+    25 & 19 & [EM] & 57 & 39 & 9 & 89 & 59 & Y \\
+    26 & 1A & [SUB] & 58 & 3A & : & 90 & 5A & Z \\
+    27 & 1B & [ESC] & 59 & 3B & ; & 91 & 5B & [ \\
+    28 & 1C & [FS] & 60 & 3C & < & 92 & 5C & \textbackslash \\
+    29 & 1D & [GS] & 61 & 3D & = & 93 & 5D & ] \\
+    30 & 1E & [RS] & 62 & 3E & > & 94 & 5E & \textasciicircum \\
+    31 & 1F & [US] & 63 & 3F & ? & 95 & 5F & \_ \\
+    \hline
+    \end{tabular}
+
+}
+% \caption{Complete ASCII Character Table (0-127)}
+% \label{tab:ascii_complete}
+\end{table}
+
+\begin{table}[H]
+\makebox[\linewidth][c]
+{
+    \begin{tabular}{| c | c | c |} 
+    \hline
+    \textbf{Dec} & \textbf{Hex} & \textbf{Char} \\
+    \hline
+    96 & 60 & \textasciigrave \\
+    97 & 61 & a \\
+    98 & 62 & b \\
+    99 & 63 & c \\
+    100 & 64 & d \\
+    101 & 65 & e \\
+    102 & 66 & f \\
+    103 & 67 & g \\
+    104 & 68 & h \\
+    105 & 69 & i \\
+    106 & 6A & j \\
+    107 & 6B & k \\
+    108 & 6C & l \\
+    109 & 6D & m \\
+    110 & 6E & n \\
+    111 & 6F & o \\
+    112 & 70 & p \\
+    113 & 71 & q \\
+    114 & 72 & r \\
+    115 & 73 & s \\
+    116 & 74 & t \\
+    117 & 75 & u \\
+    118 & 76 & v \\
+    119 & 77 & w \\
+    120 & 78 & x \\
+    121 & 79 & y \\
+    122 & 7A & z \\
+    123 & 7B & \{ \\
+    124 & 7C & | \\
+    125 & 7D & \} \\
+    126 & 7E & \textasciitilde \\
+    127 & 7F & [DEL] \\
+    \hline
+    \end{tabular}
+}
+\caption{ASCII Characters 96-127 (Vertical Layout)}
+\end{table}
+
+\newpage
+
+\begin{table}[H]
+\makebox[\linewidth][c]
+{
+    \begin{tabular}{| c | c | c | c | c | c | c | c | c | c | c | c |} 
+    \hline
+    \textbf{Dec} & \textbf{Hex} & \textbf{Char} & \textbf{Dec} & \textbf{Hex} & \textbf{Char} & \textbf{Dec} & \textbf{Hex} & \textbf{Char} & \textbf{Dec} & \textbf{Hex} & \textbf{Char} \\
+    \hline
+    0 & 00 & [NULL] & 32 & 20 & [SPACE] & 64 & 40 & @ & 96 & 60 & \textasciigrave \\
+    1 & 01 & [SOH] & 33 & 21 & ! & 65 & 41 & A & 97 & 61 & a \\
+    2 & 02 & [STX] & 34 & 22 & " & 66 & 42 & B & 98 & 62 & b \\
+    3 & 03 & [ETX] & 35 & 23 & \# & 67 & 43 & C & 99 & 63 & c \\
+    4 & 04 & [EOT] & 36 & 24 & \$ & 68 & 44 & D & 100 & 64 & d \\
+    5 & 05 & [ENQ] & 37 & 25 & \% & 69 & 45 & E & 101 & 65 & e \\
+    6 & 06 & [ACK] & 38 & 26 & \& & 70 & 46 & F & 102 & 66 & f \\
+    7 & 07 & [BEL] & 39 & 27 & ' & 71 & 47 & G & 103 & 67 & g \\
+    8 & 08 & [BS] & 40 & 28 & ( & 72 & 48 & H & 104 & 68 & h \\
+    9 & 09 & [TAB] & 41 & 29 & ) & 73 & 49 & I & 105 & 69 & i \\
+    10 & 0A & [LF] & 42 & 2A & * & 74 & 4A & J & 106 & 6A & j \\
+    11 & 0B & [VT] & 43 & 2B & + & 75 & 4B & K & 107 & 6B & k \\
+    12 & 0C & [FF] & 44 & 2C & , & 76 & 4C & L & 108 & 6C & l \\
+    13 & 0D & [CR] & 45 & 2D & - & 77 & 4D & M & 109 & 6D & m \\
+    14 & 0E & [SO] & 46 & 2E & . & 78 & 4E & N & 110 & 6E & n \\
+    15 & 0F & [SI] & 47 & 2F & / & 79 & 4F & O & 111 & 6F & o \\
+    16 & 10 & [DLE] & 48 & 30 & 0 & 80 & 50 & P & 112 & 70 & p \\
+    17 & 11 & [DC1] & 49 & 31 & 1 & 81 & 51 & Q & 113 & 71 & q \\
+    18 & 12 & [DC2] & 50 & 32 & 2 & 82 & 52 & R & 114 & 72 & r \\
+    19 & 13 & [DC3] & 51 & 33 & 3 & 83 & 53 & S & 115 & 73 & s \\
+    20 & 14 & [DC4] & 52 & 34 & 4 & 84 & 54 & T & 116 & 74 & t \\
+    21 & 15 & [NAK] & 53 & 35 & 5 & 85 & 55 & U & 117 & 75 & u \\
+    22 & 16 & [SYN] & 54 & 36 & 6 & 86 & 56 & V & 118 & 76 & v \\
+    23 & 17 & [ETB] & 55 & 37 & 7 & 87 & 57 & W & 119 & 77 & w \\
+    24 & 18 & [CAN] & 56 & 38 & 8 & 88 & 58 & X & 120 & 78 & x \\
+    25 & 19 & [EM] & 57 & 39 & 9 & 89 & 59 & Y & 121 & 79 & y \\
+    26 & 1A & [SUB] & 58 & 3A & : & 90 & 5A & Z & 122 & 7A & z \\
+    27 & 1B & [ESC] & 59 & 3B & ; & 91 & 5B & [ & 123 & 7B & \{ \\
+    28 & 1C & [FS] & 60 & 3C & < & 92 & 5C & \textbackslash & 124 & 7C & | \\
+    29 & 1D & [GS] & 61 & 3D & = & 93 & 5D & ] & 125 & 7D & \} \\
+    30 & 1E & [RS] & 62 & 3E & > & 94 & 5E & \textasciicircum & 126 & 7E & \textasciitilde \\
+    31 & 1F & [US] & 63 & 3F & ? & 95 & 5F & \_ & 127 & 7F & [DEL] \\
+    \hline
+    \end{tabular}
+}
+% \caption{Complete ASCII Character Table (0-127)}
+% \label{tab:ascii_complete}
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\addcontentsline{toc}{part}{Lab Tasks}
+\part*{\centering Lab Tasks}
+
+\addcontentsline{toc}{section}{Lab 09 Tasks}
+\section*{Lab 09 Tasks}
+
+
+\begin{enumerate}
+
+\item Write a function \textcolor{red}{\texttt{void reverseArray (int* arr, int length)}} that reverses an array. Demonstrate by printing the array before and after reversing.
+
+\item Write a function \textcolor{red}{\texttt{int findMax (int* arr, int length)}} that finds the maximum value in an array. Demonstrate this by writing a program that declares an array of 
+5 variables, uses a \textcolor{red}{\texttt{for}} loop to take input from console (from user) using \textcolor{red}{\texttt{scanf}}, and prints the max by calling the function.
+
+\item Write a function \textcolor{red}{\texttt{int findIndexOf (int* arr, int length, int value)}} that searches the array for \textcolor{red}{\texttt{value}} and returns the index. If 
+\textcolor{red}{\texttt{value}} does not exist in array, the function should return $-1$.
+
+\item \textbf{Student Grade Management}
+
+A teacher wants to analyze class performance. Write a program that:
+
+\begin{itemize}
+    \item Stores marks of 50 students in an array (Use \textcolor{red}{\texttt{rand() \% (100 - 50) + 50}}).
+    \item Calculates the class average (use a function).
+    \item Finds how many students scored above 90\% (use a function).
+\end{itemize}
+
+Include \textcolor{red}{\texttt{<stdlib.h>}} in your code to use \textcolor{red}{\texttt{rand()}}.
+
+\item Write a program to add two square matrices and display the result. 
+
+\end{enumerate}
+
+
+\newpage
+\addcontentsline{toc}{section}{Lab 10 Tasks}
+\section*{Lab 10 Tasks}
+
+\begin{enumerate}
+    \item Write a function \textcolor{red}{\texttt{void removeCommas(char* str)}} to remove all commas from a string. Do not forget to null-terminate the modified string. Use the following 
+    string to test your code:
+
+    \textcolor{red}{\texttt{char str[] = "C,o,,m,,,,,,i,c,,,,,  ,,,,, ,,,, s,a,n,s, r,e,i,g,n,,s s,u,p,r,e,,,,m,e,,,,";}}
+
+    \item Write a function \textcolor{red}{\texttt{void copyString(char* destinationString, const char* sourceString)}} to copy one string into another. Make sure that 
+    \textcolor{red}{\texttt{d1estinationString}} is at least as large as \textcolor{red}{\texttt{sourceString}}.
+
+    \item Write a function to concatenate two strings.
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
