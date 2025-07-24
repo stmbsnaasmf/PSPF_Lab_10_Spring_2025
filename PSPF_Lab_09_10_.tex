@@ -487,11 +487,13 @@ int main()
     int rows = 5, cols = 5;
     int **array;
     // Allocate rows
-    array = (int **) malloc(rows * sizeof(int *));
+    array = 
+    (int **) malloc(rows * sizeof(int *));
     for (int i = 0; i < rows; i++)
     {
         // Allocate columns for each row
-        array[i] = (int *) malloc(cols * sizeof(int));
+        array[i] = 
+        (int *) malloc(cols * sizeof(int));
     }
 
     printArray(rows, cols, array);
@@ -502,8 +504,8 @@ int main()
         free(array[i]);
     }
     free(array);
-    
-    return 0;
+
+    return 0;   
 }
 \end{minted}
 
@@ -720,34 +722,35 @@ We access individual characters of strings or \textcolor{red}{\texttt{char}} arr
 
 int getStringLength(char* str)
 {
-	int length = 0;
-	int index = 0;
-	
-	//while (str[index++] != '\0')
-	while (str[index] != '\0')
-	{
-		index++;
-		length++;
-	}
-	
-	return length;
+    int length = 0;
+    int index = 0;
+
+    //while (str[index++] != '\0')
+    while (str[index] != '\0')
+    {
+        index++;
+        length++;
+    }
+
+    return length;
 }
 
 int main()
 {
-	char name[50] = "Asif";
-	
-	printf("%s\n", name);
-	
-	char str[100];
-	
-	printf("Enter string: ");
-	scanf(" %s", str);
-	printf("%s\n", str);
+    char name[50] = "Asif";
 
-	printf("Length = %d\n", getStringLength(str));
+    printf("%s\n", name);
 
-	return 0;
+    char str[100];
+
+    printf("Enter string: ");
+    scanf(" %s", str);
+    printf("%s\n", str);
+
+    printf("Length = %d\n", 
+    getStringLength(str));
+
+    return 0;
 }
 
 \end{minted}
@@ -755,100 +758,7 @@ int main()
 \newpage
 \addcontentsline{toc}{section}{ASCII Table}
 \section*{ASCII Table}
-
-\begin{table}[H]
-\makebox[\linewidth][c]
-{
-    \begin{tabular}{| c | c | c | c | c | c | c | c | c |} 
-    \hline
-    \textbf{Dec} & \textbf{Hex} & \textbf{Char} & \textbf{Dec} & \textbf{Hex} & \textbf{Char} & \textbf{Dec} & \textbf{Hex} & \textbf{Char} \\
-    \hline
-    0 & 00 & [NULL] & 32 & 20 & [SPACE] & 64 & 40 & @ \\
-    1 & 01 & [SOH] & 33 & 21 & ! & 65 & 41 & A \\
-    2 & 02 & [STX] & 34 & 22 & " & 66 & 42 & B \\
-    3 & 03 & [ETX] & 35 & 23 & \# & 67 & 43 & C \\
-    4 & 04 & [EOT] & 36 & 24 & \$ & 68 & 44 & D \\
-    5 & 05 & [ENQ] & 37 & 25 & \% & 69 & 45 & E \\
-    6 & 06 & [ACK] & 38 & 26 & \& & 70 & 46 & F \\
-    7 & 07 & [BEL] & 39 & 27 & ' & 71 & 47 & G \\
-    8 & 08 & [BS] & 40 & 28 & ( & 72 & 48 & H \\
-    9 & 09 & [TAB] & 41 & 29 & ) & 73 & 49 & I \\
-    10 & 0A & [LF] & 42 & 2A & * & 74 & 4A & J \\
-    11 & 0B & [VT] & 43 & 2B & + & 75 & 4B & K \\
-    12 & 0C & [FF] & 44 & 2C & , & 76 & 4C & L \\
-    13 & 0D & [CR] & 45 & 2D & - & 77 & 4D & M \\
-    14 & 0E & [SO] & 46 & 2E & . & 78 & 4E & N \\
-    15 & 0F & [SI] & 47 & 2F & / & 79 & 4F & O \\
-    16 & 10 & [DLE] & 48 & 30 & 0 & 80 & 50 & P \\
-    17 & 11 & [DC1] & 49 & 31 & 1 & 81 & 51 & Q \\
-    18 & 12 & [DC2] & 50 & 32 & 2 & 82 & 52 & R \\
-    19 & 13 & [DC3] & 51 & 33 & 3 & 83 & 53 & S \\
-    20 & 14 & [DC4] & 52 & 34 & 4 & 84 & 54 & T \\
-    21 & 15 & [NAK] & 53 & 35 & 5 & 85 & 55 & U \\
-    22 & 16 & [SYN] & 54 & 36 & 6 & 86 & 56 & V \\
-    23 & 17 & [ETB] & 55 & 37 & 7 & 87 & 57 & W \\
-    24 & 18 & [CAN] & 56 & 38 & 8 & 88 & 58 & X \\
-    25 & 19 & [EM] & 57 & 39 & 9 & 89 & 59 & Y \\
-    26 & 1A & [SUB] & 58 & 3A & : & 90 & 5A & Z \\
-    27 & 1B & [ESC] & 59 & 3B & ; & 91 & 5B & [ \\
-    28 & 1C & [FS] & 60 & 3C & < & 92 & 5C & \textbackslash \\
-    29 & 1D & [GS] & 61 & 3D & = & 93 & 5D & ] \\
-    30 & 1E & [RS] & 62 & 3E & > & 94 & 5E & \textasciicircum \\
-    31 & 1F & [US] & 63 & 3F & ? & 95 & 5F & \_ \\
-    \hline
-    \end{tabular}
-
-}
-% \caption{Complete ASCII Character Table (0-127)}
-% \label{tab:ascii_complete}
-\end{table}
-
-\begin{table}[H]
-\makebox[\linewidth][c]
-{
-    \begin{tabular}{| c | c | c |} 
-    \hline
-    \textbf{Dec} & \textbf{Hex} & \textbf{Char} \\
-    \hline
-    96 & 60 & \textasciigrave \\
-    97 & 61 & a \\
-    98 & 62 & b \\
-    99 & 63 & c \\
-    100 & 64 & d \\
-    101 & 65 & e \\
-    102 & 66 & f \\
-    103 & 67 & g \\
-    104 & 68 & h \\
-    105 & 69 & i \\
-    106 & 6A & j \\
-    107 & 6B & k \\
-    108 & 6C & l \\
-    109 & 6D & m \\
-    110 & 6E & n \\
-    111 & 6F & o \\
-    112 & 70 & p \\
-    113 & 71 & q \\
-    114 & 72 & r \\
-    115 & 73 & s \\
-    116 & 74 & t \\
-    117 & 75 & u \\
-    118 & 76 & v \\
-    119 & 77 & w \\
-    120 & 78 & x \\
-    121 & 79 & y \\
-    122 & 7A & z \\
-    123 & 7B & \{ \\
-    124 & 7C & | \\
-    125 & 7D & \} \\
-    126 & 7E & \textasciitilde \\
-    127 & 7F & [DEL] \\
-    \hline
-    \end{tabular}
-}
-\caption{ASCII Characters 96-127 (Vertical Layout)}
-\end{table}
-
-\newpage
+% \newpage
 
 \begin{table}[H]
 \makebox[\linewidth][c]
@@ -954,8 +864,11 @@ Include \textcolor{red}{\texttt{<stdlib.h>}} in your code to use \textcolor{red}
     \item Write a function \textcolor{red}{\texttt{void copyString(char* destinationString, const char* sourceString)}} to copy one string into another. Make sure that 
     \textcolor{red}{\texttt{d1estinationString}} is at least as large as \textcolor{red}{\texttt{sourceString}}.
 
-    \item Write a function to concatenate two strings.
+    \item Write a function to concatenate two strings. Make sure that the string being concatenated into, can hold all the characters of the other string without memory stomping.
 
+    \item Write a function to reverse a string.
+    
+    \item Write a function that checks if a given string is palindrome. A palindrome is a string that reads the same forward and backward, like "mom", "radar", "level", "refer".
 \end{enumerate}
 
 
