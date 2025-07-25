@@ -855,6 +855,14 @@ Include \textcolor{red}{\texttt{<stdlib.h>}} in your code to use \textcolor{red}
 \addcontentsline{toc}{section}{Lab 10 Tasks}
 \section*{Lab 10 Tasks}
 
+\noindent \textbf{Notes:} 
+
+\begin{itemize}
+    \item You may skip Task 01 for now. 
+    \item Task 06 is a \textbf{potential final exam question}. Do not skip it and do not copy it from ChatGPT. Do your best and do not hesitate to seek help from your fellow students and your teachers, preferably in 
+    that order.
+\end{itemize}
+
 \begin{enumerate}
     \item Write a function \textcolor{red}{\texttt{void removeCommas(char* str)}} to remove all commas from a string. Do not forget to null-terminate the modified string. Use the following 
     string to test your code:
@@ -869,6 +877,67 @@ Include \textcolor{red}{\texttt{<stdlib.h>}} in your code to use \textcolor{red}
     \item Write a function to reverse a string.
     
     \item Write a function that checks if a given string is palindrome. A palindrome is a string that reads the same forward and backward, like "mom", "radar", "level", "refer".
+
+    \item \textbf{Levenshtein Distance:} Implement the naive recursive implementation. \\
+    
+    The \href{https://en.wikipedia.org/wiki/Levenshtein_distance}{Levenshtein distance} is a string metric for measuring the difference between two sequences. The Levenshtein distance between two words is the minimum number of single-character edits (insertions, deletions or substitutions) required to change one word into the other. \\
+    
+    The Levenshtein distance between two strings $a$, $b$ (of length $|a|$ and $|b|$ respectively) is given by $\text{lev} \, (a, b)$ where: \\
+    
+    \begin{align*}
+        \text{lev} \, (a, b) &= \begin{cases}
+            |a| & \text{if } |b| = 0, \\
+            |b| & \text{if } |a| = 0, \\
+            \text{lev} \, (\text{tail} \, (a), \text{tail} \, (b)) & \text{if } \text{head} \, (a) = \text{head} \, (b) \\
+            1 + \min \begin{cases}
+                \text{lev} \, (\text{tail} \, (a), b) \\
+                \text{lev} \, (a, \text{tail} \, (b)) \\
+                \text{lev} \, (\text{tail} \, (a), \text{tail} \, (b)) \\
+            \end{cases} & \text{otherwise}
+        \end{cases}
+    \end{align*}
+
+    Where: \\
+    
+    $\text{tail} \, (x)$ refers to a string that excludes the first character of the string $x$. For example, if $x$ = ``Asif\textbackslash 0'', $\text{tail} \, (x)$ = ``sif\textbackslash 0''. 
+
+    $\text{head} \, (x)$ refers to a string containing only the first character of the string $x$. If $x$ = ``Asif\textbackslash 0'', $\text{head} \, (x)$ = ``A\textbackslash 0''. \\
+
+    Test your function on the follwong strings: \\
+
+    \textcolor{red}{\texttt{char a[] = ``kitten''}}  
+
+    \textcolor{red}{\texttt{char b[] = ``sitting''}} \\
+
+    \textcolor{red}{\texttt{int lev(char* a, char* b)}} should return \textcolor{red}{\texttt{3}} for the strings ``kitten'' and ``sitting''. \\
+
+    \textbf{Hints:}
+
+    \begin{itemize}
+        \item You will need the following helper functions: \\
+        
+            \textcolor{red}{\texttt{int getStringLength(char* str);}}
+
+            \textcolor{red}{\texttt{char* tail(char* str);}}
+
+            \textcolor{red}{\texttt{void copyString(char* destinationString, const char* sourceString);}}
+                
+            \textcolor{red}{\texttt{int min(int x, int y, int z);}} \\
+    
+        \item Beware that when you are passing the strings in the ``otherwise'' case, you need to pass the same strings to all three \textcolor{red}{\texttt{lev}} function calls. 
+        For example, if string \textcolor{red}{\texttt{a}} was ``kitten'' when passed to the first of the three \textcolor{red}{\texttt{lev}} calls, that is, 
+        \textcolor{red}{\texttt{lev (tail(a), b)}}, \textcolor{red}{\texttt{a}} \textbf{must} still be ``kitten'' when passed to the second and third of the three \textcolor{red}{\texttt{lev}} calls, that 
+        is, \textcolor{red}{\texttt{lev (a, tail(b))}} and \textcolor{red}{\texttt{lev (tail(a), tail(b))}}, \textbf{instead of being reduced to just} ``itten'' or something even shorter. \\
+
+        The easiest way to do so is to make three copies of both \textcolor{red}{\texttt{a}} and \textcolor{red}{\texttt{b}}, and pass the copies to the three function calls. You will need to use 
+        \textcolor{red}{\texttt{int getStringLength(char* str)}} and \textcolor{red}{\texttt{void copyString(char* destinationString, const char* sourceString)}}. \\
+
+        \item You may use this site to verify your implementation for other strings: \href{https://planetcalc.com/1721/}{Online calculator: Levenshtein distance}. 
+    
+    \end{itemize}
+
+    For teachers' reference: \url{https://github.com/stmbsnaasmf/levenshtein-c}
+
 \end{enumerate}
 
 
